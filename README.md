@@ -1,4 +1,4 @@
-# Podsum
+# Podsum Newsletter
 
 Summarizes the latest podcast episode, identifies podcast guests, and identifies key highlights/takeaways.
 
