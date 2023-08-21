@@ -66,7 +66,7 @@ def main():
 
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient. Make sure your podcast is not more than 30 mins")
-    st.sidebar.markdown("_It will fetch the most recent episode of the podcast")
+    st.sidebar.markdown("_It will fetch the most recent episode of the podcast_")
 
 
     if process_button:
