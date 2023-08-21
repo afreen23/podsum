@@ -1,10 +1,12 @@
+%%writefile /content/podcast/podcast_frontend.py
 import streamlit as st
 import modal
 import json
 import os
 
 def main():
-    st.title("Podsum Newsletter")
+    st.title("Welcome to Podsum Newsletter")
+    st.write("Get your podcast summarised without need to spend hours listening!")
 
     available_podcast_info = create_dict_from_json_files('.')
 
@@ -20,11 +22,10 @@ def main():
         podcast_info = available_podcast_info[selected_podcast]
 
         # Right section - Newsletter content
-        st.header("Sahih Bukhari podcasts")
+        # st.header("Latest Episode")
 
         # Display the podcast title
-        st.subheader("Episode Title")
-        st.write(podcast_info['podcast_details']['episode_title'])
+        st.subheader(podcast_info['podcast_details']['podcast_title'])
 
         # Display the podcast summary and the cover image in a side-by-side layout
         col1, col2 = st.columns([7, 3])
@@ -37,8 +38,19 @@ def main():
         with col2:
             st.image(podcast_info['podcast_details']['episode_image'], caption="Podcast Cover", width=300, use_column_width=True)
 
+        # Display the podcast guest and their details in a side-by-side layout
+        col3, col4 = st.columns([3, 7])
+
+        with col3:
+            st.subheader("Podcast Guest")
+            st.write(podcast_info['podcast_guest']['name'])
+
+        with col4:
+            st.subheader("Podcast Guest Details")
+            st.write(podcast_info["podcast_guest"]['summary'])
+
         # Display the five key moments
-        st.subheader("Key Takeaways")
+        st.subheader("Key Moments")
         key_moments = podcast_info['podcast_highlights']
         for moment in key_moments.split('\n'):
             st.markdown(
@@ -49,7 +61,7 @@ def main():
     url = st.sidebar.text_input("Link to RSS Feed")
 
     process_button = st.sidebar.button("Process Podcast Feed")
-    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
+    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins and make sure your podcast is ~30mins and not more that, please be patient.")
 
     if process_button:
 
@@ -57,11 +69,10 @@ def main():
         podcast_info = process_podcast_info(url)
 
         # Right section - Newsletter content
-        st.header("Newsletter Content")
+        # st.header("Latest Episode")
 
         # Display the podcast title
-        st.subheader("Episode Title")
-        st.write(podcast_info['podcast_details']['episode_title'])
+        st.subheader(podcast_info['podcast_details']['podcast_title'])
 
         # Display the podcast summary and the cover image in a side-by-side layout
         col1, col2 = st.columns([7, 3])
@@ -73,6 +84,17 @@ def main():
 
         with col2:
             st.image(podcast_info['podcast_details']['episode_image'], caption="Podcast Cover", width=300, use_column_width=True)
+
+        # Display the podcast guest and their details in a side-by-side layout
+        col3, col4 = st.columns([3, 7])
+
+        with col3:
+            st.subheader("Podcast Guest")
+            st.write(podcast_info['podcast_guest']['name'])
+
+        with col4:
+            st.subheader("Podcast Guest Details")
+            st.write(podcast_info["podcast_guest"]['summary'])
 
         # Display the five key moments
         st.subheader("Key Moments")
