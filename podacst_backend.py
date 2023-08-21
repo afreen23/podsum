@@ -105,7 +105,9 @@ def get_podcast_guest(podcast_transcript):
     import openai
     import wikipedia
     import json
-
+    
+    # Since the information about guest would be in starting only
+    # Setting it large would increase the context window and the model might not accept that many tokens
     request = podcast_transcript[:5000]
     chatOutput = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
@@ -173,7 +175,7 @@ def get_podcast_highlights(podcast_transcript):
      Extract 5 key moments from the podcast.
      These are typically interesting insights from the guest or critical questions that the host might have put forward.
      It could also be a discussion on a hot topic or controversial opinion.
-     Please do not use any further explanatiosn from your side. stick to the contect of podcast.
+     Please do not use any further explanations from your side. stick to the context of podcast.
     """
 
   request = instructPrompt + podcast_transcript
