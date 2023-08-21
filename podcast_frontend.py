@@ -1,8 +1,15 @@
-%%writefile /content/podcast/podcast_frontend.py
 import streamlit as st
 import modal
 import json
 import os
+streamlit_style = """
+			<style>
+			p, ol, ul, dl  {
+			font-size: 1.18rem;
+			}
+			</style>
+			"""
+st.markdown(streamlit_style, unsafe_allow_html=True)
 
 def main():
     st.title("Welcome to Podsum Newsletter")
@@ -21,9 +28,6 @@ def main():
 
         podcast_info = available_podcast_info[selected_podcast]
 
-        # Right section - Newsletter content
-        # st.header("Latest Episode")
-
         # Display the podcast title
         st.subheader(podcast_info['podcast_details']['podcast_title'])
 
@@ -32,9 +36,9 @@ def main():
 
         with col1:
             # Display the podcast episode summary
-            st.subheader("Podcast Episode Summary")
+            st.subheader("Latest Episode Summary")
             st.write(podcast_info['podcast_summary'])
-
+            
         with col2:
             st.image(podcast_info['podcast_details']['episode_image'], caption="Podcast Cover", width=300, use_column_width=True)
 
@@ -61,15 +65,12 @@ def main():
     url = st.sidebar.text_input("Link to RSS Feed")
 
     process_button = st.sidebar.button("Process Podcast Feed")
-    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins and make sure your podcast is ~30mins and not more that, please be patient.")
+    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient. Make sure your podcast is not more than 30 mins")
 
     if process_button:
 
         # Call the function to process the URLs and retrieve podcast guest information
         podcast_info = process_podcast_info(url)
-
-        # Right section - Newsletter content
-        # st.header("Latest Episode")
 
         # Display the podcast title
         st.subheader(podcast_info['podcast_details']['podcast_title'])
@@ -79,7 +80,7 @@ def main():
 
         with col1:
             # Display the podcast episode summary
-            st.subheader("Podcast Episode Summary")
+            st.subheader("Latest Episode Summary")
             st.write(podcast_info['podcast_summary'])
 
         with col2:
