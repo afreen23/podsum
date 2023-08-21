@@ -8,4 +8,4 @@ Modal is used for deploying the information extraction function on-demand.
 
 ![Screenshot from 2023-08-21 20-51-12](https://github.com/afreen23/podsum/assets/25664409/b16cee8c-124a-49a1-997e-e9d5bf3a51c2)
 
-![Click here](https://youtu.be/2GAC-pDaIm0) for the full demo generating podcasts on the go.
+[Click here](https://youtu.be/2GAC-pDaIm0) for the full demo generating podcasts on the go.
